@@ -1,1 +1,39 @@
 
+# Employee Tracker App
+
+Employee Tracker is a React Native application that allows employees to track their location and perform location tracking. The app utilizes the React Native Foreground Service for continuous location tracking.
+
+## Features
+
+- Signup using Email and Password
+- Start and stop location tracking.
+- Display real-time latitude and longitude using sliders.
+- Perform check-ins with recorded location.
+- regular Email notification of location
+- Get Time to Time notification of latitude
+- Location checkin history
+- Logout functionality.
+
+## Getting Started
+
+To get started with the app, follow these steps:
+
+### Prerequisites
+
+- Node.js installed on your machine
+- React native cli version > 72
+
+### Installation
+
+1. Clone the repository:
+
+   git clone https://github.com/your-username/employee-tracker-app.git
+
+2. npm install
+
+3. npm start 
+
+4. choose emultor
+
+ 
+
