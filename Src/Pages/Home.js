@@ -16,21 +16,26 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {saveCheck} from '../Api';
 import {useFocusEffect} from '@react-navigation/native';
 
+const fetchLocation1 = () => {
+  Geolocation.getCurrentPosition(position => {
+    return position;
+  });
+};
+
 const Home = ({navigation}) => {
   const [location, setLocation] = useState(null);
   const [isTracking, setIsTracking] = useState(false);
+
+  const fetchLocation = () => {
+    Geolocation.getCurrentPosition(position => {
+      setLocation(position);
+    });
+  };
 
   useEffect(() => {
     fetchLocation();
     startTracking();
   }, []);
-
-  const fetchLocation = () => {
-    Geolocation.getCurrentPosition(position => {
-      setLocation(position);
-      console.log(location);
-    });
-  };
 
   useFocusEffect(
     useCallback(() => {
@@ -41,7 +46,6 @@ const Home = ({navigation}) => {
   const startTracking = () => {
     ReactNativeForegroundService.add_task(
       () => {
-        console.log('alok');
         fetchLocation();
       },
       {
@@ -62,8 +66,8 @@ const Home = ({navigation}) => {
       setOnlyAlertOnce: true,
       color: '#000000',
     });
-    setIsTracking(true);
     AddCheckLocation();
+    setIsTracking(true);
   };
 
   const stopTracking = () => {
@@ -92,14 +96,15 @@ const Home = ({navigation}) => {
   );
 
   const AddCheckLocation = async () => {
-    console.log(location);
-    let id = await AsyncStorage.getItem('id');
-    saveCheck({
-      Lat: location ? location.coords.latitude.toFixed(6) : null,
-      Lon: location ? location.coords.longitude.toFixed(6) : null,
-      UserId: id,
-    }).then(res => {
-      console.log(res);
+    Geolocation.getCurrentPosition(async loc => {
+      let id = await AsyncStorage.getItem('id');
+      saveCheck({
+        Lat: loc ? loc.coords.latitude.toFixed(6) : null,
+        Lon: loc ? loc.coords.longitude.toFixed(6) : null,
+        UserId: id,
+      }).then(res => {
+        console.log(res);
+      });
     });
   };
 

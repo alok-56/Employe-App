@@ -194,7 +194,7 @@ const Login = ({navigation}) => {
                 color: '#000',
               }}>
               Don’t have an account?
-              <TouchableOpacity onPress={() =>navigation.navigate("Signup")}>
+              <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
                 <Text
                   style={{
                     fontSize: 20,
